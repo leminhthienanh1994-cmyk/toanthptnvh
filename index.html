@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Khóa học Toán THPT (10 - 11 - 12)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Nạp cấu trúc mục lục 3 khối -->
+  <script src="data/curriculum.js"></script>
+
+  <style>
+    :root { --primary: #0284c7; --sidebar-w: 300px; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; color: #334155; }
+    
+    /* Top Navbar chọn khối */
+    #top-nav { height: 56px; background: #0f172a; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; color: #fff; flex-shrink: 0; }
+    .brand { font-size: 1.15rem; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+    .grade-selector { display: flex; gap: 8px; }
+    .grade-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: 0.2s; }
+    .grade-btn:hover { background: #334155; color: #fff; }
+    .grade-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Vùng thân trang */
+    #body-wrap { display: flex; flex: 1; height: calc(100vh - 56px); overflow: hidden; }
+
+    /* Menu bên trái */
+    #sidebar { width: var(--sidebar-w); background: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; flex-shrink: 0; }
+    .sidebar-header { padding: 14px 18px; border-bottom: 1px solid #e2e8f0; font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+    .sidebar-content { flex: 1; overflow-y: auto; padding: 10px; }
+    .chapter-title { font-size: 0.82rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin: 15px 5px 6px; }
+    .lesson-item { padding: 9px 12px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; margin-bottom: 4px; transition: 0.2s; line-height: 1.35; }
+    .lesson-item:hover { background: #f1f5f9; }
+    .lesson-item.active { background: #e0f2fe; color: var(--primary); font-weight: 600; }
+
+    /* Khung bài học bên phải */
+    #main-content { flex: 1; overflow-y: auto; padding: 25px 35px; }
+    .container { max-width: 850px; margin: auto; }
+    .tabs { display: flex; gap: 8px; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
+    .tab-btn { background: none; border: none; padding: 10px 18px; font-size: 0.95rem; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .theory-box { background: #fff; padding: 22px; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 1.7; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .topic-title { margin-top: 25px; color: #0f172a; border-left: 4px solid var(--primary); padding-left: 10px; font-size: 1.1rem; }
+    .card { background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .q-text { font-weight: 600; margin-bottom: 12px; font-size: 1.05rem; }
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .opt-btn { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; text-align: left; cursor: pointer; font-size: 0.95rem; }
+    .opt-btn:hover { background: #e2e8f0; }
+    .opt-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .opt-btn.correct { background: var(--success) !important; color: #fff !important; }
+    .opt-btn.wrong { background: var(--danger) !important; color: #fff !important; }
+
+    .actions { display: flex; gap: 8px; }
+    .btn { padding: 6px 14px; border-radius: 5px; border: none; font-weight: 600; cursor: pointer; }
+    .btn-check { background: var(--primary); color: #fff; }
+    .btn-sol { background: #fff; border: 1px solid #cbd5e1; color: #475569; }
+    .solution { display: none; margin-top: 12px; padding: 12px; background: #f0fdf4; border-left: 3px solid var(--success); }
+    
+    .btn-submit { background: var(--success); color: white; padding: 12px 20px; font-size: 1.05rem; width: 100%; border-radius: 6px; border: none; cursor: pointer; margin-top: 15px; }
+    .result-alert { display: none; padding: 15px; background: #fef08a; border-radius: 6px; margin-top: 15px; font-weight: 600; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Chọn Khối Lớp -->
+  <div id="top-nav">
+    <div class="brand">📐 DẠY HỌC TOÁN THPT</div>
+    <div class="grade-selector">
+      <button class="grade-btn" onclick="selectGrade(10, this)">Toán 10</button>
+      <button class="grade-btn" onclick="selectGrade(11, this)">Toán 11</button>
+      <button class="grade-btn active" onclick="selectGrade(12, this)">Toán 12</button>
+    </div>
+  </div>
+
+  <div id="body-wrap">
+    <!-- Menu danh mục bài học -->
+    <div id="sidebar">
+      <div class="sidebar-header" id="sidebar-grade-label">TOÁN 12</div>
+      <div class="sidebar-content" id="menu-container"></div>
+    </div>
+
+    <!-- Vùng bài học -->
+    <div id="main-content">
+      <div class="container">
+        <h2 id="lesson-header" style="margin-top:0;">Đang nạp bài học...</h2>
+        
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('tab-theory', this)">📖 Lý thuyết</button>
+          <button class="tab-btn" onclick="switchTab('tab-practice', this)">📝 Bài tập theo dạng</button>
+          <button class="tab-btn" onclick="switchTab('tab-quiz', this)">⏱️ Đề tự luyện</button>
+        </div>
+
+        <div id="tab-theory" class="tab-content active">
+          <div class="theory-box" id="theory-container"></div>
+        </div>
+
+        <div id="tab-practice" class="tab-content">
+          <div id="practice-container"></div>
+        </div>
+
+        <div id="tab-quiz" class="tab-content">
+          <div class="card" style="background:#eef2ff;">
+            <input type="text" id="student-name" placeholder="Nhập họ tên học sinh..." style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">
+          </div>
+          <div id="quiz-container"></div>
+          <button class="btn-submit" onclick="submitFinalQuiz()">Nộp bài thi</button>
+          <div class="result-alert" id="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let currentGrade = 12;
+  let practiceAnswers = {};
+  let quizAnswers = {};
+
+  // Chuyển khối lớp
+  function selectGrade(grade, btnEl) {
+    currentGrade = grade;
+    document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    document.getElementById('sidebar-grade-label').innerText = `CHƯƠNG TRÌNH TOÁN ${grade}`;
+    buildSidebar();
+  }
+
+  // Tự sinh menu bên trái theo khối hiện tại
+  function buildSidebar() {
+    const menu = document.getElementById('menu-container');
+    menu.innerHTML = '';
+    const gradeCurriculum = window.CURRICULUM_DATA[currentGrade] || [];
+
+    if (gradeCurriculum.length === 0) {
+      menu.innerHTML = '<div style="padding:10px; color:#94a3b8;">Chưa có bài học cho khối này.</div>';
+      return;
+    }
+
+    gradeCurriculum.forEach(group => {
+      const chTitle = document.createElement('div');
+      chTitle.className = 'chapter-title';
+      chTitle.innerText = group.chapter;
+      menu.appendChild(chTitle);
+
+      group.lessons.forEach(l => {
+        const item = document.createElement('div');
+        item.className = 'lesson-item';
+        item.id = `nav-${l.id}`;
+        item.innerText = l.name;
+        item.onclick = () => loadLessonFile(l.file, l.id);
+        menu.appendChild(item);
+      });
+    });
+
+    // Mặc định nạp bài đầu tiên của khối đó
+    if (gradeCurriculum[0]?.lessons[0]) {
+      const first = gradeCurriculum[0].lessons[0];
+      loadLessonFile(first.file, first.id);
+    }
+  }
+
+  function loadLessonFile(filePath, lessonId) {
+    document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+    const activeNav = document.getElementById(`nav-${lessonId}`);
+    if (activeNav) activeNav.classList.add('active');
+
+    const oldScript = document.getElementById('lesson-runtime-script');
+    if (oldScript) oldScript.remove();
+
+    const script = document.createElement('script');
+    script.id = 'lesson-runtime-script';
+    script.src = filePath;
+    script.onload = () => {
+      practiceAnswers = {};
+      quizAnswers = {};
+      renderLessonUI(window.CURRENT_LESSON);
+    };
+    script.onerror = () => {
+      document.getElementById('lesson-header').innerText = "Bài học đang được cập nhật...";
+      document.getElementById('theory-container').innerHTML = "Chưa có nội dung cho bài này.";
+      document.getElementById('practice-container').innerHTML = "";
+      document.getElementById('quiz-container').innerHTML = "";
+    };
+    document.body.appendChild(script);
+  }
+
+  function renderLessonUI(data) {
+    document.getElementById('lesson-header').innerText = data.unit_title;
+    document.getElementById('theory-container').innerHTML = data.theory;
+
+    const pBox = document.getElementById('practice-container');
+    pBox.innerHTML = '';
+    data.topics.forEach((top, tIdx) => {
+      const title = document.createElement('h3');
+      title.className = 'topic-title';
+      title.innerText = top.topic_name;
+      pBox.appendChild(title);
+
+      top.questions.forEach((q, qIdx) => {
+        pBox.appendChild(renderCard(q, `p_${tIdx}_${qIdx}`, true));
+      });
+    });
+
+    const qBox = document.getElementById('quiz-container');
+    qBox.innerHTML = '';
+    data.final_quiz.questions.forEach((q, qIdx) => {
+      qBox.appendChild(renderCard(q, `q_${qIdx}`, false));
+    });
+
+    document.getElementById('quiz-result').style.display = 'none';
+
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  }
+
+  function renderCard(q, uid, isPractice) {
+    const letters = ['A', 'B', 'C', 'D'];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = `card_${uid}`;
+
+    let opts = '';
+    q.options.forEach((opt, oIdx) => {
+      opts += `<button class="opt-btn" onclick="chooseAns('${uid}', ${oIdx}, ${isPractice})">
+        <strong>${letters[oIdx]}.</strong> ${opt}
+      </button>`;
+    });
+
+    let extra = '';
+    if (isPractice) {
+      extra = `
+        <div class="actions">
+          <button class="btn btn-check" onclick="checkPractice('${uid}', ${q.correct})">Kiểm tra</button>
+          <button class="btn btn-sol" onclick="toggleSol('${uid}')">Lời giải</button>
+        </div>
+        <div class="solution" id="sol_${uid}">${q.solution}</div>
+      `;
+    }
+
+    card.innerHTML = `<div class="q-text">Câu ${q.id}: ${q.question}</div><div class="options">${opts}</div>${extra}`;
+    return card;
+  }
+
+  function chooseAns(uid, oIdx, isPractice) {
+    if (isPractice) practiceAnswers[uid] = oIdx;
+    else quizAnswers[uid] = oIdx;
+
+    const card = document.getElementById(`card_${uid}`);
+    card.querySelectorAll('.opt-btn').forEach((btn, idx) => {
+      btn.classList.toggle('selected', idx === oIdx);
+    });
+  }
+
+  function checkPractice(uid, correctIdx) {
+    const selected = practiceAnswers[uid];
+    if (selected === undefined) { alert("Vui lòng chọn đáp án!"); return; }
+    const card = document.getElementById(`card_${uid}`);
+    card.querySelectorAll('.opt-btn').forEach((btn, idx) => {
+      btn.classList.remove('selected', 'correct', 'wrong');
+      if (idx === correctIdx) btn.classList.add('correct');
+      if (idx === selected && selected !== correctIdx) btn.classList.add('wrong');
+    });
+  }
+
+  function toggleSol(uid) {
+    const s = document.getElementById(`sol_${uid}`);
+    s.style.display = (s.style.display === 'block') ? 'none' : 'block';
+  }
+
+  function submitFinalQuiz() {
+    let score = 0;
+    const total = window.CURRENT_LESSON.final_quiz.questions.length;
+    window.CURRENT_LESSON.final_quiz.questions.forEach((q, idx) => {
+      const uid = `q_${idx}`;
+      const sel = quizAnswers[uid];
+      const card = document.getElementById(`card_${uid}`);
+      card.querySelectorAll('.opt-btn').forEach((btn, bIdx) => {
+        btn.classList.remove('selected', 'correct', 'wrong');
+        if (bIdx === q.correct) btn.classList.add('correct');
+        if (bIdx === sel && sel !== q.correct) btn.classList.add('wrong');
+      });
+      if (sel === q.correct) score++;
+    });
+    const res = document.getElementById('quiz-result');
+    res.style.display = 'block';
+    res.innerText = `Điểm số của bạn: ${score}/${total} câu đúng!`;
+  }
+
+  function switchTab(id, el) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Khởi động mặc định vào khối 12
+  window.onload = () => selectGrade(12, document.querySelectorAll('.grade-btn')[2]);
+</script>
+</body>
+</html>
