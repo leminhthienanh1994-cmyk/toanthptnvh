@@ -13,16 +13,16 @@ window.CURRENT_LESSON = {
           solution: "Tập xác định: $D = \\mathbb{R}$.<br>Ta có $y' = -3x^2 + 6x$.<br>Giải phương trình: $y' = 0 \\Leftrightarrow -3x(x - 2) = 0 \\Leftrightarrow \\left[\\begin{aligned} x &= 0 \\\\ x &= 2 \\end{aligned}\\right.$<br>Xét dấu đạo hàm $y'$: Ta thấy $y' > 0 \\Leftrightarrow x \\in (0; 2)$.<br>Vậy hàm số đồng biến trên khoảng $(0; 2)$."
         },
         {
-          "id": 2,
-          "question": "Cho hàm số $y = \\dfrac{2x - 1}{x + 1}$. Khẳng định nào sau đây là khẳng định đúng?",
-          "options": [
+          id: 2,
+          question: "Cho hàm số $y = \\dfrac{2x - 1}{x + 1}$. Khẳng định nào sau đây là khẳng định đúng?",
+          options: [
             "Hàm số đồng biến trên từng khoảng xác định.",
             "Hàm số nghịch biến trên từng khoảng xác định.",
             "Hàm số đồng biến trên khoảng $(-\\infty; +\\infty)$.",
             "Hàm số nghịch biến trên $\\mathbb{R} \\setminus \\{-1\\}$."
           ],
-          "correct": 0,
-          "solution": "Tập xác định: $D = \\mathbb{R} \\setminus \\{-1\\}$.<br>Đạo hàm: $y' = \\dfrac{2 \\cdot 1 - (-1) \\cdot 1}{(x + 1)^2} = \\dfrac{3}{(x + 1)^2} > 0, \\forall x \\neq -1$.<br>Do đó hàm số đồng biến trên từng khoảng xác định $(-\\infty; -1)$ và $(-1; +\\infty)$."
+          correct: 0,
+          solution: "Tập xác định: $D = \\mathbb{R} \\setminus \\{-1\\}$.<br>Đạo hàm: $y' = \\dfrac{2 \\cdot 1 - (-1) \\cdot 1}{(x + 1)^2} = \\dfrac{3}{(x + 1)^2} > 0, \\forall x \\neq -1$.<br>Do đó hàm số đồng biến trên từng khoảng xác định $(-\\infty; -1)$ và $(-1; +\\infty)$."
         }
       ]
     },
@@ -63,38 +63,38 @@ window.CURRENT_LESSON = {
     questions: [
       {
         id: 1,
-        question: "Hàm số $y = x^4 - 4x^2 + 1$ nghịch biến trên khoảng nào dưới đây?",
-        options: ["$(-\\infty; -\\sqrt{2})$", "$(-\\sqrt{2}; 0)$", "$(0; \\sqrt{2})$", "$(-\\sqrt{2}; \\sqrt{2})$"],
-        correct: 0,
-        solution: "Ta có $y' = 4x^3 - 8x = 4x(x^2 - 2)$. Cho $y' = 0 \\Leftrightarrow x = 0$ hoặc $x = \\pm\\sqrt{2}$. Dựa vào bảng xét dấu, hàm số nghịch biến trên $(-\\infty; -\\sqrt{2})$ và $(0; \\sqrt{2})$."
+        question: "Cho hàm số $y=f(x)$ có bảng biến thiên như hình vẽ:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$-2$</td><td></td><td>$2$</td><td></td><td>$+\\infty$</td></tr><tr><td>$f'(x)$</td><td></td><td>$-$</td><td>$0$</td><td>$+$</td><td style='border-left: 3px double black; border-right: 3px double black;'></td><td>$+$</td><td></td></tr><tr><td>$f(x)$</td><td>$+\\infty$</td><td>$\\searrow$</td><td>$1$</td><td>$\\nearrow$</td><td style='border-left: 3px double black; border-right: 3px double black;'>$+\\infty$ | $-\\infty$</td><td>$\\nearrow$</td><td>$+\\infty$</td></tr></table></div>Hàm số đồng biến trên khoảng nào dưới đây?",
+        options: ["$(-2; +\\infty)$", "$(-1; 1)$", "$(-\\infty; 0)$", "$(-1; 3)$"],
+        correct: 1, // Đáp án đúng là (-1; 1)
+        solution: "Theo bảng biến thiên, hàm số đồng biến trên khoảng $(-2; 2)$.<br>Vì $(-1; 1) \\subset (-2; 2)$ nên hàm số cũng đồng biến trên khoảng $(-1; 1)$."
       },
       {
         id: 2,
-        question: "Cho hàm số $y = f(x)$ có bảng xét dấu của $f'(x)$ như sau:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$-2$</td><td></td><td>$0$</td><td></td><td>$2$</td><td></td><td>$+\\infty$</td></tr><tr><td>$f'(x)$</td><td></td><td>$+$</td><td>$0$</td><td>$-$</td><td>$0$</td><td>$+$</td><td>$0$</td><td>$-$</td><td></td></tr></table></div>Hàm số đã cho có bao nhiêu điểm cực trị?",
-        options: ["$3$", "$2$", "$1$", "$0$"],
-        correct: 0,
-        solution: "Đạo hàm $f'(x)$ đổi dấu $3$ lần khi qua các điểm $x = -2$, $x = 0$, $x = 2$ nên hàm số có $3$ điểm cực trị."
+        question: "Cho hàm số $y=f(x)$ có bảng biến thiên như sau:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$1$</td><td></td><td>$2$</td><td></td><td>$+\\infty$</td></tr><tr><td>$y'$</td><td></td><td>$+$</td><td>$0$</td><td>$-$</td><td>$0$</td><td>$+$</td><td></td></tr><tr><td>$y$</td><td>$-\\infty$</td><td>$\\nearrow$</td><td>$3$</td><td>$\\searrow$</td><td>$0$</td><td>$\\nearrow$</td><td>$+\\infty$</td></tr></table></div>Hàm số đã cho đồng biến trên khoảng nào dưới đây?",
+        options: ["$(-\\infty; 3)$", "$(0; +\\infty)$", "$(2; +\\infty)$", "$(1; 2)$"],
+        correct: 2, // Đáp án đúng là (2; +\\infty)
+        solution: "Dựa vào bảng biến thiên, ta thấy $y' > 0$ trên các khoảng $(-\\infty; 1)$ và $(2; +\\infty)$. Do đó hàm số đồng biến trên $(-\\infty; 1)$ và $(2; +\\infty)$."
       },
       {
         id: 3,
-        question: "Tìm tất cả các giá trị của tham số $m$ để hàm số $y = \\dfrac{x + m}{x + 1}$ đồng biến trên từng khoảng xác định.",
-        options: ["$m < 1$", "$m > 1$", "$m \\le 1$", "$m \\ge 1$"],
-        correct: 0,
-        solution: "Tập xác định: $D = \\mathbb{R} \\setminus \\{-1\\}$. Ta có $y' = \\dfrac{1 - m}{(x + 1)^2}$. Để hàm số đồng biến trên từng khoảng xác định thì $y' > 0, \\forall x \\neq -1 \\Leftrightarrow 1 - m > 0 \\Leftrightarrow m < 1$."
+        question: "Cho hàm số $y=f(x)$ liên tục trên $\\mathbb{R}$ và có bảng biến thiên như sau:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$-2$</td><td></td><td>$0$</td><td></td><td>$2$</td><td></td><td>$+\\infty$</td></tr><tr><td>$y'$</td><td></td><td>$+$</td><td>$0$</td><td>$-$</td><td>$0$</td><td>$+$</td><td>$0$</td><td>$-$</td><td></td></tr><tr><td>$y$</td><td>$-\\infty$</td><td>$\\nearrow$</td><td>$3$</td><td>$\\searrow$</td><td>$-1$</td><td>$\\nearrow$</td><td>$3$</td><td>$\\searrow$</td><td>$-\\infty$</td></tr></table></div>Hàm số $y=f(x)$ nghịch biến trên khoảng nào dưới đây?",
+        options: ["$(0; +\\infty)$", "$(-\\infty; -2)$", "$(-2; 0)$", "$(0; 2)$"],
+        correct: 2, // Đáp án đúng là (-2; 0)
+        solution: "Dựa vào bảng biến thiên của hàm số $y=f(x)$, ta thấy $y' \\le 0$ trên $(-2; 0)$ và $(2; +\\infty)$. Do đó hàm số nghịch biến trên $(-2; 0)$ và $(2; +\\infty)$."
       },
       {
         id: 4,
-        question: "Đồ thị hàm số $y = x^3 - 3x^2 + 2$ có điểm cực tiểu là:",
-        options: ["$(2; -2)$", "$(0; 2)$", "$(2; 2)$", "$(-2; 2)$"],
-        correct: 0,
-        solution: "Ta có $y' = 3x^2 - 6x = 3x(x - 2) = 0 \\Leftrightarrow x = 0$ hoặc $x = 2$. Bảng biến thiên cho thấy điểm cực tiểu của hàm số là $x = 2 \\Rightarrow y(2) = 2^3 - 3\\cdot 2^2 + 2 = -2$. Vậy điểm cực tiểu của đồ thị là $(2; -2)$."
+        question: "Cho hàm số $y=f(x)$ có bảng biến thiên như sau:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$-3$</td><td></td><td>$1$</td><td></td><td>$+\\infty$</td></tr><tr><td>$y'$</td><td></td><td>$-$</td><td>$0$</td><td>$+$</td><td>$0$</td><td>$-$</td><td></td></tr><tr><td>$y$</td><td>$+\\infty$</td><td>$\\searrow$</td><td>$-28$</td><td>$\\nearrow$</td><td>$4$</td><td>$\\searrow$</td><td>$-\\infty$</td></tr></table></div>Hàm số đã cho nghịch biến trên khoảng nào sau đây?",
+        options: ["$(-3; +\\infty)$", "$(1; +\\infty)$", "$(-3; 1)$", "$(-\\infty; 1)$"],
+        correct: 1, // Đáp án đúng là (1; +\\infty)
+        solution: "Từ bảng biến thiên, ta thấy $y' < 0$ trên các khoảng $(-\\infty; -3)$ và $(1; +\\infty)$. Do đó hàm số nghịch biến trên $(-\\infty; -3)$ và $(1; +\\infty)$."
       },
       {
         id: 5,
-        question: "Tìm tất cả các giá trị thực của tham số $m$ để hàm số $y = x^3 - 3mx^2 + 3(m^2 - 1)x + 2$ có hai điểm cực trị?",
-        options: ["$\\forall m \\in \\mathbb{R}$", "$m \\neq 0$", "$m > 1$", "$m < -1$"],
-        correct: 0,
-        solution: "Tập xác định: $D = \\mathbb{R}$. Ta có $y' = 3x^2 - 6mx + 3(m^2 - 1)$. Phương trình $y' = 0 \\Leftrightarrow x^2 - 2mx + m^2 - 1 = 0$. Hàm số có hai điểm cực trị khi phương trình $y' = 0$ có 2 nghiệm phân biệt $\\Leftrightarrow \\Delta' = m^2 - (m^2 - 1) = 1 > 0$ (luôn đúng với mọi $m \\in \\mathbb{R}$)."
+        question: "Cho hàm số $y=f(x)$ có bảng biến thiên như sau:<br><div style='overflow-x:auto; margin: 10px 0;'><table border='1' cellpadding='6' style='border-collapse:collapse; text-align:center; margin:auto;'><tr><td>$x$</td><td>$-\\infty$</td><td></td><td>$1$</td><td></td><td>$2$</td><td></td><td>$+\\infty$</td></tr><tr><td>$f'(x)$</td><td></td><td>$+$</td><td>$0$</td><td>$-$</td><td>$0$</td><td>$+$</td><td></td></tr><tr><td>$f(x)$</td><td>$-\\infty$</td><td>$\\nearrow$</td><td>$2$</td><td>$\\searrow$</td><td>$-1$</td><td>$\\nearrow$</td><td>$+\\infty$</td></tr></table></div>Hàm số nghịch biến trên khoảng nào sau đây?",
+        options: ["$(-\\infty; 1)$", "$(2; +\\infty)$", "$(0; 3)$", "$(1; 2)$"],
+        correct: 3, // Đáp án đúng là (1; 2)
+        solution: "Từ bảng biến thiên, ta thấy đạo hàm $f'(x) < 0$ với mọi $x \\in (1; 2)$. Do đó hàm số nghịch biến trên khoảng $(1; 2)$."
       }
     ]
   }
