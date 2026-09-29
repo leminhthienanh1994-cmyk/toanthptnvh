@@ -10,35 +10,95 @@
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
-  <!-- Nạp trực tiếp curriculum.js ngang hàng -->
+  <!-- Nạp curriculum.js ngang hàng -->
   <script src="curriculum.js"></script>
 
   <style>
-    :root { --primary: #0284c7; --sidebar-w: 300px; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; }
+    :root { 
+      --primary: #0284c7; 
+      --primary-hover: #0369a1;
+      --sidebar-w: 300px; 
+      --success: #16a34a; 
+      --danger: #dc2626; 
+      --bg: #f8fafc; 
+    }
     * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; color: #334155; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      background: var(--bg); 
+      margin: 0; 
+      display: flex; 
+      flex-direction: column; 
+      height: 100vh; 
+      overflow: hidden; 
+      color: #334155; 
+    }
     
-    #top-nav { height: 56px; background: #0f172a; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; color: #fff; flex-shrink: 0; }
+    #top-nav { 
+      height: 56px; 
+      background: #0f172a; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 0 20px; 
+      color: #fff; 
+      flex-shrink: 0; 
+    }
     .brand { font-size: 1.15rem; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
     .grade-selector { display: flex; gap: 8px; }
-    .grade-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: 0.2s; }
+    .grade-btn { 
+      background: #1e293b; 
+      color: #94a3b8; 
+      border: 1px solid #334155; 
+      padding: 6px 16px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: 600; 
+      font-size: 0.95rem; 
+      transition: 0.2s; 
+    }
     .grade-btn:hover { background: #334155; color: #fff; }
     .grade-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
     #body-wrap { display: flex; flex: 1; height: calc(100vh - 56px); overflow: hidden; }
 
-    #sidebar { width: var(--sidebar-w); background: #ffffff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; flex-shrink: 0; }
+    #sidebar { 
+      width: var(--sidebar-w); 
+      background: #ffffff; 
+      border-right: 1px solid #e2e8f0; 
+      display: flex; 
+      flex-direction: column; 
+      flex-shrink: 0; 
+    }
     .sidebar-header { padding: 14px 18px; border-bottom: 1px solid #e2e8f0; font-size: 1.05rem; font-weight: 700; color: var(--primary); }
     .sidebar-content { flex: 1; overflow-y: auto; padding: 10px; }
     .chapter-title { font-size: 0.82rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin: 15px 5px 6px; }
-    .lesson-item { padding: 9px 12px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; margin-bottom: 4px; transition: 0.2s; line-height: 1.35; }
+    .lesson-item { 
+      padding: 9px 12px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-size: 0.9rem; 
+      margin-bottom: 4px; 
+      transition: 0.2s; 
+      line-height: 1.35; 
+    }
     .lesson-item:hover { background: #f1f5f9; }
     .lesson-item.active { background: #e0f2fe; color: var(--primary); font-weight: 600; }
 
     #main-content { flex: 1; overflow-y: auto; padding: 25px 35px; }
     .container { max-width: 850px; margin: auto; }
     .tabs { display: flex; gap: 8px; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
-    .tab-btn { background: none; border: none; padding: 10px 18px; font-size: 0.95rem; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+    .tab-btn { 
+      background: none; 
+      border: none; 
+      padding: 10px 18px; 
+      font-size: 0.95rem; 
+      font-weight: 600; 
+      color: #64748b; 
+      cursor: pointer; 
+      border-bottom: 3px solid transparent; 
+      margin-bottom: -2px; 
+    }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -48,24 +108,58 @@
     .card { background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
     .q-text { font-weight: 600; margin-bottom: 12px; font-size: 1.05rem; }
     .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; }
-    .opt-btn { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; text-align: left; cursor: pointer; font-size: 0.95rem; }
+    .opt-btn { 
+      background: #f8fafc; 
+      border: 1px solid #cbd5e1; 
+      border-radius: 6px; 
+      padding: 10px; 
+      text-align: left; 
+      cursor: pointer; 
+      font-size: 0.95rem; 
+      transition: background 0.15s;
+    }
     .opt-btn:hover { background: #e2e8f0; }
     .opt-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .opt-btn.correct { background: var(--success) !important; color: #fff !important; }
-    .opt-btn.wrong { background: var(--danger) !important; color: #fff !important; }
+    .opt-btn.correct { background: var(--success) !important; color: #fff !important; border-color: var(--success) !important; }
+    .opt-btn.wrong { background: var(--danger) !important; color: #fff !important; border-color: var(--danger) !important; }
 
     .actions { display: flex; gap: 8px; }
     .btn { padding: 6px 14px; border-radius: 5px; border: none; font-weight: 600; cursor: pointer; }
     .btn-check { background: var(--primary); color: #fff; }
+    .btn-check:hover { background: var(--primary-hover); }
     .btn-sol { background: #fff; border: 1px solid #cbd5e1; color: #475569; }
-    .solution { display: none; margin-top: 12px; padding: 12px; background: #f0fdf4; border-left: 3px solid var(--success); }
+    .solution { display: none; margin-top: 12px; padding: 12px; background: #f0fdf4; border-left: 3px solid var(--success); line-height: 1.6; }
     
-    .btn-submit { background: var(--success); color: white; padding: 12px 20px; font-size: 1.05rem; width: 100%; border-radius: 6px; border: none; cursor: pointer; margin-top: 15px; }
-    .result-alert { display: none; padding: 15px; background: #fef08a; border-radius: 6px; margin-top: 15px; font-weight: 600; text-align: center; }
+    .btn-submit { 
+      background: var(--success); 
+      color: white; 
+      padding: 12px 20px; 
+      font-size: 1.05rem; 
+      font-weight: 700;
+      width: 100%; 
+      border-radius: 6px; 
+      border: none; 
+      cursor: pointer; 
+      margin-top: 15px; 
+      transition: opacity 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+    .result-alert { 
+      display: none; 
+      padding: 15px; 
+      background: #fef08a; 
+      border: 1px solid #fde047;
+      border-radius: 6px; 
+      margin-top: 15px; 
+      font-weight: 600; 
+      text-align: center; 
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Thanh chọn khối lớp -->
   <div id="top-nav">
     <div class="brand">📐 DẠY HỌC TOÁN THPT</div>
     <div class="grade-selector">
@@ -76,11 +170,13 @@
   </div>
 
   <div id="body-wrap">
+    <!-- Cột Menu danh mục -->
     <div id="sidebar">
       <div class="sidebar-header" id="sidebar-grade-label">CHƯƠNG TRÌNH TOÁN 12</div>
       <div class="sidebar-content" id="menu-container"></div>
     </div>
 
+    <!-- Khung hiển thị nội dung -->
     <div id="main-content">
       <div class="container">
         <h2 id="lesson-header" style="margin-top:0;">Đang nạp bài học...</h2>
@@ -91,20 +187,27 @@
           <button class="tab-btn" onclick="switchTab('tab-quiz', this)">⏱️ Đề tự luyện</button>
         </div>
 
+        <!-- Tab 1: Lý thuyết -->
         <div id="tab-theory" class="tab-content active">
           <div class="theory-box" id="theory-container"></div>
         </div>
 
+        <!-- Tab 2: Bài tập phân dạng -->
         <div id="tab-practice" class="tab-content">
           <div id="practice-container"></div>
         </div>
 
+        <!-- Tab 3: Đề tự luyện -->
         <div id="tab-quiz" class="tab-content">
-          <div class="card" style="background:#eef2ff;">
-            <input type="text" id="student-name" placeholder="Nhập họ tên học sinh..." style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">
+          <div class="card" style="background:#eef2ff; border:1px solid #c7d2fe; margin-bottom:18px;">
+            <h4 style="margin:0 0 10px 0; color:#3730a3;">Thông tin học sinh làm bài</h4>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <input type="text" id="student-name" placeholder="Họ và tên học sinh (*)" style="flex:2; min-width:180px; padding:10px; border:1px solid #cbd5e1; border-radius:6px; outline:none; font-size:0.95rem;">
+              <input type="text" id="student-class" placeholder="Lớp (Ví dụ: 12A1)" style="flex:1; min-width:120px; padding:10px; border:1px solid #cbd5e1; border-radius:6px; outline:none; font-size:0.95rem;">
+            </div>
           </div>
           <div id="quiz-container"></div>
-          <button class="btn-submit" onclick="submitFinalQuiz()">Nộp bài thi</button>
+          <button class="btn-submit" id="btn-submit-quiz" onclick="submitFinalQuiz()">Nộp bài thi</button>
           <div class="result-alert" id="quiz-result"></div>
         </div>
       </div>
@@ -112,6 +215,9 @@
   </div>
 
 <script>
+  // Link Web App nhận điểm từ Google Sheets (dán link của thầy vào đây)
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYOUR_SCRIPT_ID/exec";
+
   let currentGrade = 12;
   let practiceAnswers = {};
   let quizAnswers = {};
@@ -130,7 +236,7 @@
     const gradeCurriculum = (window.CURRICULUM_DATA && window.CURRICULUM_DATA[currentGrade]) ? window.CURRICULUM_DATA[currentGrade] : [];
 
     if (gradeCurriculum.length === 0) {
-      menu.innerHTML = '<div style="padding:10px; color:#94a3b8;">Chưa có bài học cho khối này.</div>';
+      menu.innerHTML = '<div style="padding:15px; color:#94a3b8; font-size:0.9rem;">Chưa có bài học cho khối này.</div>';
       return;
     }
 
@@ -166,7 +272,8 @@
 
     const script = document.createElement('script');
     script.id = 'lesson-runtime-script';
-    script.src = filePath;
+    // Chống lưu bộ nhớ đệm trình duyệt bằng timestamp
+    script.src = `${filePath}?v=${Date.now()}`;
     script.onload = () => {
       practiceAnswers = {};
       quizAnswers = {};
@@ -174,7 +281,7 @@
     };
     script.onerror = () => {
       document.getElementById('lesson-header').innerText = "Bài học đang được cập nhật...";
-      document.getElementById('theory-container').innerHTML = "Chưa có nội dung cho bài này.";
+      document.getElementById('theory-container').innerHTML = "<p style='color:#64748b;'>Chưa có nội dung lý thuyết cho bài học này.</p>";
       document.getElementById('practice-container').innerHTML = "";
       document.getElementById('quiz-container').innerHTML = "";
     };
@@ -185,26 +292,34 @@
     document.getElementById('lesson-header').innerText = data.unit_title;
     document.getElementById('theory-container').innerHTML = data.theory;
 
+    // Hiển thị dạng bài tập
     const pBox = document.getElementById('practice-container');
     pBox.innerHTML = '';
-    data.topics.forEach((top, tIdx) => {
-      const title = document.createElement('h3');
-      title.className = 'topic-title';
-      title.innerText = top.topic_name;
-      pBox.appendChild(title);
+    if (data.topics && data.topics.length > 0) {
+      data.topics.forEach((top, tIdx) => {
+        const title = document.createElement('h3');
+        title.className = 'topic-title';
+        title.innerText = top.topic_name;
+        pBox.appendChild(title);
 
-      top.questions.forEach((q, qIdx) => {
-        pBox.appendChild(renderCard(q, `p_${tIdx}_${qIdx}`, true));
+        top.questions.forEach((q, qIdx) => {
+          pBox.appendChild(renderCard(q, `p_${tIdx}_${qIdx}`, true));
+        });
       });
-    });
+    }
 
+    // Hiển thị đề tự luyện
     const qBox = document.getElementById('quiz-container');
     qBox.innerHTML = '';
-    data.final_quiz.questions.forEach((q, qIdx) => {
-      qBox.appendChild(renderCard(q, `q_${qIdx}`, false));
-    });
+    if (data.final_quiz && data.final_quiz.questions) {
+      data.final_quiz.questions.forEach((q, qIdx) => {
+        qBox.appendChild(renderCard(q, `q_${qIdx}`, false));
+      });
+    }
 
-    document.getElementById('quiz-result').style.display = 'none';
+    const resBox = document.getElementById('quiz-result');
+    resBox.style.display = 'none';
+    resBox.innerHTML = '';
 
     if (window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise();
@@ -240,8 +355,11 @@
   }
 
   function chooseAns(uid, oIdx, isPractice) {
-    if (isPractice) practiceAnswers[uid] = oIdx;
-    else quizAnswers[uid] = oIdx;
+    if (isPractice) {
+      practiceAnswers[uid] = oIdx;
+    } else {
+      quizAnswers[uid] = oIdx;
+    }
 
     const card = document.getElementById(`card_${uid}`);
     card.querySelectorAll('.opt-btn').forEach((btn, idx) => {
@@ -251,7 +369,10 @@
 
   function checkPractice(uid, correctIdx) {
     const selected = practiceAnswers[uid];
-    if (selected === undefined) { alert("Vui lòng chọn đáp án!"); return; }
+    if (selected === undefined) { 
+      alert("Vui lòng chọn đáp án trước khi bấm kiểm tra!"); 
+      return; 
+    }
     const card = document.getElementById(`card_${uid}`);
     card.querySelectorAll('.opt-btn').forEach((btn, idx) => {
       btn.classList.remove('selected', 'correct', 'wrong');
@@ -266,22 +387,66 @@
   }
 
   function submitFinalQuiz() {
+    const nameInput = document.getElementById('student-name');
+    const classInput = document.getElementById('student-class');
+    const name = nameInput.value.trim();
+    const studentClass = classInput.value.trim();
+
+    if (!name) {
+      alert("Vui lòng điền Họ và tên trước khi nộp bài!");
+      nameInput.focus();
+      return;
+    }
+
+    const questions = (window.CURRENT_LESSON && window.CURRENT_LESSON.final_quiz) ? window.CURRENT_LESSON.final_quiz.questions : [];
+    const total = questions.length;
     let score = 0;
-    const total = window.CURRENT_LESSON.final_quiz.questions.length;
-    window.CURRENT_LESSON.final_quiz.questions.forEach((q, idx) => {
+    let details = [];
+
+    questions.forEach((q, idx) => {
       const uid = `q_${idx}`;
       const sel = quizAnswers[uid];
       const card = document.getElementById(`card_${uid}`);
+      
       card.querySelectorAll('.opt-btn').forEach((btn, bIdx) => {
         btn.classList.remove('selected', 'correct', 'wrong');
         if (bIdx === q.correct) btn.classList.add('correct');
         if (bIdx === sel && sel !== q.correct) btn.classList.add('wrong');
       });
-      if (sel === q.correct) score++;
+
+      if (sel === q.correct) {
+        score++;
+        details.push(`Câu ${q.id}: Đúng`);
+      } else {
+        details.push(`Câu ${q.id}: Sai`);
+      }
     });
+
     const res = document.getElementById('quiz-result');
     res.style.display = 'block';
-    res.innerText = `Điểm số của bạn: ${score}/${total} câu đúng!`;
+    res.innerText = "Đang gửi bài thi về hệ thống quản lý...";
+
+    // Gửi dữ liệu về Google Sheets
+    const payload = {
+      name: name,
+      studentClass: studentClass || "Không ghi",
+      lessonTitle: window.CURRENT_LESSON.unit_title || "Bài luyện tập",
+      score: `${score}/${total}`,
+      detail: details.join(", ")
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      res.innerHTML = `🎉 <b>Đã nộp bài thành công!</b><br>Học sinh: <b>${name}</b> (${studentClass || 'Tự do'})<br>Kết quả: <b>${score}/${total}</b> câu đúng.`;
+    })
+    .catch(() => {
+      res.innerHTML = `Đã hoàn thành! Kết quả: <b>${score}/${total}</b> câu đúng. (Lỗi kết nối máy chủ điểm số).`;
+    });
   }
 
   function switchTab(id, el) {
