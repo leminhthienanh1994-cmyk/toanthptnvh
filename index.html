@@ -10,8 +10,8 @@
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
-  <!-- Nạp curriculum.js ngang hàng -->
-  <pt src="curriculum.js"></pt>
+  <!-- Đã sửa thành thẻ script nạp file curriculum.js -->
+  <script src="curriculum.js"></script>
 
   <style>
     :root { 
@@ -116,7 +116,7 @@
       text-align: left; 
       cursor: pointer; 
       font-size: 0.95rem; 
-      transition: background 0.15s;
+      transition: background 0.15s; 
     }
     .opt-btn:hover { background: #e2e8f0; }
     .opt-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
@@ -135,25 +135,25 @@
       color: white; 
       padding: 12px 20px; 
       font-size: 1.05rem; 
-      font-weight: 700;
+      font-weight: 700; 
       width: 100%; 
       border-radius: 6px; 
       border: none; 
       cursor: pointer; 
       margin-top: 15px; 
-      transition: opacity 0.2s;
+      transition: opacity 0.2s; 
     }
     .btn-submit:hover { opacity: 0.9; }
     .result-alert { 
       display: none; 
       padding: 15px; 
       background: #fef08a; 
-      border: 1px solid #fde047;
+      border: 1px solid #fde047; 
       border-radius: 6px; 
       margin-top: 15px; 
       font-weight: 600; 
       text-align: center; 
-      line-height: 1.5;
+      line-height: 1.5; 
     }
   </style>
 </head>
@@ -215,7 +215,6 @@
   </div>
 
 <script>
-  // Link Web App nhận điểm từ Google Sheets đã cập nhật của thầy
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTszwlUsmxJIEMmfq7mfew2IC9CIk1uEymfXH3VGGq8FkroANPuHh9ko8e3togtKq9/exec";
 
   let currentGrade = 12;
@@ -272,7 +271,6 @@
 
     const script = document.createElement('script');
     script.id = 'lesson-runtime-script';
-    // Chống lưu bộ nhớ đệm trình duyệt bằng timestamp
     script.src = `${filePath}?v=${Date.now()}`;
     script.onload = () => {
       practiceAnswers = {};
@@ -289,10 +287,10 @@
   }
 
   function renderLessonUI(data) {
-    document.getElementById('lesson-header').innerText = data.unit_title;
-    document.getElementById('theory-container').innerHTML = data.theory;
+    if (!data) return;
+    document.getElementById('lesson-header').innerText = data.unit_title || '';
+    document.getElementById('theory-container').innerHTML = data.theory || '';
 
-    // Hiển thị dạng bài tập
     const pBox = document.getElementById('practice-container');
     pBox.innerHTML = '';
     if (data.topics && data.topics.length > 0) {
@@ -308,7 +306,6 @@
       });
     }
 
-    // Hiển thị đề tự luyện
     const qBox = document.getElementById('quiz-container');
     qBox.innerHTML = '';
     if (data.final_quiz && data.final_quiz.questions) {
@@ -426,7 +423,6 @@
     res.style.display = 'block';
     res.innerText = "Đang gửi bài thi về hệ thống quản lý...";
 
-    // Gói dữ liệu gửi về Google Sheets
     const payload = {
       name: name,
       studentClass: studentClass || "Không ghi",
