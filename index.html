@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Toán THPT (10 - 11 - 12)</title>
+  <title>Khóa học Toán THPT (10 - 11 - 12)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <script>
@@ -215,8 +215,8 @@
   </div>
 
 <script>
-  // Link Web App nhận điểm từ Google Sheets (dán link của thầy vào đây)
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYOUR_SCRIPT_ID/exec";
+  // Link Web App nhận điểm từ Google Sheets đã cập nhật của thầy
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCXvG-j3GIqbGomVdTjIKMFgyL515_lEeYvdRYsNM5dC6jJ7tUgUhJeLpbSZ2g7gu_/exec";
 
   let currentGrade = 12;
   let practiceAnswers = {};
@@ -426,11 +426,11 @@
     res.style.display = 'block';
     res.innerText = "Đang gửi bài thi về hệ thống quản lý...";
 
-    // Gửi dữ liệu về Google Sheets
+    // Gói dữ liệu gửi về Google Sheets
     const payload = {
       name: name,
       studentClass: studentClass || "Không ghi",
-      lessonTitle: window.CURRENT_LESSON.unit_title || "Bài luyện tập",
+      lessonTitle: (window.CURRENT_LESSON && window.CURRENT_LESSON.unit_title) ? window.CURRENT_LESSON.unit_title : "Bài luyện tập",
       score: `${score}/${total}`,
       detail: details.join(", ")
     };
